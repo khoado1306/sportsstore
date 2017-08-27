@@ -1,0 +1,34 @@
+﻿@model Domain.Entities.Cart
+<div class="navbar-right hidden-xs">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Checkout", "Index", "Cart",
+     new { returnUrl = Request.Url.PathAndQuery },
+     new { @class = "btn btn-default navbar-btn" })
+        using (Html.BeginForm("LogOut", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" value="Log out" class="btn btn-default navbar-btn" />
+        }
+    }
+    else
+    {
+        @Html.ActionLink("Login", "Login", "Account", null, new { @class = "btn btn-default navbar-btn" })
+        }
+</div>
+<!--Responsive content for mobile -->
+<div class="navbar-right visible-xs">
+    <a href=@Url.Action("Index", "Cart", new { returnUrl = Request.Url.PathAndQuery })
+       class="btn btn-default navbar-btn">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+    </a>
+</div>
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <div class="navbar-text navbar-right">
+        
+        <b class="hidden-xs">Hello @HttpContext.Current.User.Identity.Name, Your cart:</b>
+        @Model.LinesCollection.Sum(p => p.Quantity) item(s)
+        @Model.ComputeTotalValue().ToString("c")
+    </div>
+}

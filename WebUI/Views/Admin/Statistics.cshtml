@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-2">
+            @Html.ActionLink("Home Page", "List", "Product", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="col-xs-2">
+            @Html.ActionLink("Admin Dashboard", "Index", "Admin", null, new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <img src="@Url.Action("SalesByMonth","ChartHelpers")" alt="Sales by Month" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <img src="@Url.Action("SalesByYear","ChartHelpers")" alt="Sales by Year" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <img src="@Url.Action("BestCustomer","ChartHelpers")" alt="Best Customers" />
+        </div>
+    </div>
+</div>

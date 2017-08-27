@@ -1,0 +1,17 @@
+﻿@using WebUI.Models
+@using WebUI.HtmlHelpers
+@model ProductsListViewModel
+@{
+    ViewBag.Title = "Products";
+}
+@foreach (var p in Model.Products)
+{
+    @Html.Partial("ProductSumary", p)
+}
+<img src="@Url.Action("CheapestProducts","ChartHelpers")" alt="Cheapest Products" />
+<img src="@Url.Action("BestProducts","ChartHelpers")" alt="Best Products" />
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+</div>
+
+
